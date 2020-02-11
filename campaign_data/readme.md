@@ -26,5 +26,5 @@ Used to pull fb insights data into a csv.
 ```
 python3 campaign_data.py --version
 
-python3 campaign_data.py --ad_accounts_file accounts.txt --access_token_file token.txt --output_file output.csv
+python3 campaign_data.py --ad_accounts_file accounts.txt --access_token_file token.txt --start_time 2020-02-04 --end_time 2020-02-11 --output_file output.csv
 ```
