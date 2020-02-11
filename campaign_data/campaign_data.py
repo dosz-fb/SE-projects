@@ -17,12 +17,30 @@ parser.add_argument('-v', '--version', action='version', version=f'%(prog)s {SCR
 parser.add_argument('-o', '--output_file', default="output.csv", help="CSV file output name (default: output.csv)")
 parser.add_argument('-d', '--ad_accounts_file', help="File with all the ad account id's separated by new lines", required=True)
 parser.add_argument('-a', '--access_token_file', help="File with the facebook access token to make API calls", required=True)
+parser.add_argument('-s', '--start_time', help="Start time of the report in format 'YYYY-MM-DD'", required=True)
+parser.add_argument('-e', '--end_time', help="Start time of the report in format 'YYYY-MM-DD'", required=True)
 args = parser.parse_args()
 
 print("Processing:")
 print("  ad_account_ids_file:", args.ad_accounts_file)
 print("  access_token_file:", args.access_token_file)
+print("  start_time: ", args.start_time)
+print("  end_time: ", args.end_time)
 print("  output_file: ", args.output_file)
+
+###########################
+
+def parseTimes(start_time, end_time):
+    # check the times are valid, or throw an exception
+    s = time.strptime(start_time, "%Y-%m-%d")
+    e = time.strptime(end_time, "%Y-%m-%d")
+    if e < s:
+        raise Exception("End time before start time")
+
+    return {"start": time.strftime("%Y-%m-%d", s), "end": time.strftime("%Y-%m-%d", e)}
+
+# get time ranges
+time_ranges = [parseTimes(args.start_time, args.end_time)]
 
 ###########################
 
@@ -38,13 +56,6 @@ stats = {
     "insight_size": 0,
     "had_error": None,
 }
-
-###########################
-
-# get time ranges
-time_ranges = [
-    {"start": "2020-02-04", "end": "2020-02-11"},
-]
 
 ###########################
 
@@ -154,7 +165,6 @@ try:
             }
             url = f"https://graph.facebook.com/{API_VERSION}/act_{AD_ACCOUNT_ID}/insights"
             resp = requests.get(url, params = params)
-            #insights?fields=reach,spend,campaign_id,campaign_name,cpm,cpc,frequency,impressions,actions&level=campaign&attribution_windows=28d_click,28d_view&time_range={"since":"2020-02-04","until":"2020-02-11"}
 
             if resp.status_code != 200:
                 stats["insight_errors"][f"{AD_ACCOUNT_ID}/{start_time_range}"] = resp.json()
