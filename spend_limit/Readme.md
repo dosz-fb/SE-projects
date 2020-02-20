@@ -1,6 +1,7 @@
 # Adjust Ad Account Spend Limits
 
-A short script to update spend_cap for a list of ad accounts.
+A script to update spend_cap for a list of ad accounts.
+Another script to reset the amount_spent for a list of ad accounts.
 
 see https://developers.facebook.com/docs/marketing-api/reference/ad-account#Updating
 
@@ -21,7 +22,15 @@ see https://developers.facebook.com/docs/marketing-api/reference/ad-account#Upda
 ## Usage:
 
 ```
+# To set the spend limit, run this script
 # bash spend_limit_sh AD_ACCOUNTS_FILE ACCESS_TOKEN_FILE SPEND_CAP_FLOAT
 
 bash spend_limit.sh accounts.txt token.txt 100.00
+```
+
+```
+# When you want to reset the spent counter, can use this script
+# bash reset_spent.sh AD_ACCOUNTS_FILE ACCESS_TOKEN_FILE
+
+bash reset_spent.sh accounts.txt token.txt
 ```
