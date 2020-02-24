@@ -9,8 +9,8 @@ import argparse
 
 ###########################
 
-SCRIPT_VERSION = "2020.02.11.a"
-API_VERSION = "v5.0"
+SCRIPT_VERSION = "2020.02.24.a"
+API_VERSION = "v6.0"
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-v', '--version', action='version', version=f'%(prog)s {SCRIPT_VERSION}')
@@ -156,7 +156,7 @@ try:
             start_time_range = time_range["start"]
             end_time_range = time_range["end"]
             params = {
-                "fields": "account_id,account_name,campaign_id,campaign_name,reach,impressions,frequency,spend,cpm,cpc,actions",
+                "fields": "account_id,account_name,campaign_id,campaign_name,account_currency,spend,reach,frequency,impressions,cpm,clicks,cpc,ctr,inline_link_clicks,inline_link_click_ctr,cost_per_inline_link_click,actions,video_30_sec_watched_actions,video_p25_watched_actions,video_p50_watched_actions,video_p75_watched_actions,video_p100_watched_actions,cost_per_thruplay",
                 "level": "campaign",
                 "limit": 5000,
                 "attribution_windows": "28d_click,28d_view",
@@ -165,6 +165,10 @@ try:
             }
             url = f"https://graph.facebook.com/{API_VERSION}/act_{AD_ACCOUNT_ID}/insights"
             resp = requests.get(url, params = params)
+
+            #print(resp.url)
+            #import sys
+            #sys.exit()
 
             if resp.status_code != 200:
                 stats["insight_errors"][f"{AD_ACCOUNT_ID}/{start_time_range}"] = resp.json()
@@ -183,6 +187,18 @@ try:
                 # convert the custom conversions from action
                 actions = insight.pop("actions", [])
                 for action in actions:
+                    if action.get("action_type") in [
+                        "view_content",
+                        "omni_view_content",
+                        "search",
+                        "omni_search",
+                        "lead",
+                        "onsite_web_lead",
+                        "complete_registration",
+                    ]:
+                        insight[action.get("action_type")] = action.get("value")
+                        continue
+
                     if "offsite_conversion.custom" not in action.get("action_type"):
                         # not interested in this action type
                         continue
@@ -195,6 +211,21 @@ try:
                     conversion_id = conversion_ids[0]
                     if conversion_id in conversions[AD_ACCOUNT_ID]:
                         insight[conversions[AD_ACCOUNT_ID][conversion_id]] = action.get("value")
+
+                for video_action in [
+                    "video_30_sec_watched_actions",
+                    "video_p25_watched_actions",
+                    "video_p50_watched_actions",
+                    "video_p75_watched_actions",
+                    "video_p100_watched_actions",
+                    "cost_per_thruplay",
+                ]:
+                    # convert the video_thruplay
+                    actions = insight.pop(video_action, [])
+                    if len(actions) > 0:
+                        action = actions[0]
+                        if action.get("action_type", "") == "video_view":
+                            insight[video_action] = action.get("value")
 
                 insights.append(insight)
                 stats["insight_count"] += 1
