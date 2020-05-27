@@ -25,7 +25,7 @@ see https://developers.facebook.com/docs/marketing-api/reference/ad-account#Upda
 # To set the spend limit, run this script
 # bash spend_limit_cap.sh AD_ACCOUNTS_CAP_CSV ACCESS_TOKEN_FILE
 
-bash spend_limit_cap.sh sample_ad_accounts.txt sample_access_token.txt 100.00
+bash spend_limit_cap.sh sample_ad_accounts.txt sample_access_token.txt
 ```
 
 ```
