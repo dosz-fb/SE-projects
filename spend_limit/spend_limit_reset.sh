@@ -11,6 +11,13 @@ ACCESS_TOKEN=$(cat ${ACCESS_TOKEN_FILE})
 
 while IFS="," read -r AD_ACCOUNT_ID SPEND_CAP
 do
+    if [ -z "${AD_ACCOUNT_ID}" ]; then
+        echo "action = account is blank, skipping"
+        continue
+    fi
+
+    echo "action = resetting counter for account ${AD_ACCOUNT_ID}"
+
     # check the existing spending limit
     preChange="$(curl -X GET -s -G \
                     --data access_token=${ACCESS_TOKEN} \
