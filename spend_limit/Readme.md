@@ -34,3 +34,11 @@ bash spend_limit_cap.sh sample_ad_accounts.txt sample_access_token.txt 100.00
 
 bash spend_limit_reset.sh sample_ad_accounts.txt sample_access_token.txt
 ```
+
+## Web UI
+
+To use the UI to edit/check one ad account's spend limit, navigate to:
+
+https://business.facebook.com > ad account settings > payment settings
+
+There is a "Set Your Account Spending Limit" section that contains the same information.
