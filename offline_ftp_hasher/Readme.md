@@ -1,4 +1,4 @@
-# Hash an Offline Events
+# Hash Offline Events CSV for sFTP
 
 A script to hash the 'match_key' columns of a csv for the offline events ftp upload.
 
