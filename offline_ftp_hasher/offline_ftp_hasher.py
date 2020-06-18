@@ -22,14 +22,18 @@ print("  output_file:", args.output_file)
 ###########################
 
 
+def normalizeHash(x):
+    s = str(x).encode('utf-8')
+    s = s.strip()
+    s = s.lower()
+    return hashlib.sha256(s).hexdigest()
+
+
 def hashMatchKeys(columns):
     # replaces columns with the hashed value if it starts with a certain string
     for header in columns:
         if header.startswith("match_key."):
-            newColumn = []
-            for x in columns[header]:
-                newColumn.append(hashlib.sha256(x.encode('utf-8')).hexdigest())
-            columns[header] = newColumn
+            columns[header] = [normalizeHash(x) for x in columns[header]]
     return columns
 
 
