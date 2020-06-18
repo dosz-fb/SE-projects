@@ -1,0 +1,4 @@
+currency,event_name,event_time,match_key.country_0,match_key.ct_0,match_key.email_0,match_key.fn_0,match_key.ln_0,match_key.phone_0,match_key.st_0,match_key.zip_0,value
+USD,Purchase,1579496400,US,Stanford,abc@tfbnw.net,Boris,Johnson,12345673423,California,94305,127374
+USD,Purchase,1584158400,US,Boston,def@tfbnw.net,Donald,Trump,12345672857,Massachusetts,02117,84413
+USD,Purchase,1580187600,US,Menlo Park,hij@tfbnw.net,Justin,Trudeau,12345671618,California,94025,82092
