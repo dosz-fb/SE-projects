@@ -24,6 +24,9 @@ do
     fi
 
     # echo "processing page ${PAGE_ID}"
+    
+    # for docs see https://developers.facebook.com/docs/graph-api/reference/page/live_videos/
+    # for testing see https://developers.facebook.com/tools/explorer/
 
     # check the existing spending limit
     LIVE_STREAMS_JSON="$(curl -X GET -s -G \
