@@ -1,6 +1,8 @@
 # Live Stream Counts
 
-Count the number of live streams per fb page
+Count the number of live streams per fb page.
+
+See https://developers.facebook.com/docs/graph-api/reference/page/live_videos/
 
 ## Requirements
 
