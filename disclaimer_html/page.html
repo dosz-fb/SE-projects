@@ -1,0 +1,142 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            /*
+            background-color: #000;
+            color: #fff;
+            */
+            padding: 1.78571rem 0;
+            position: relative;
+        }
+
+        .copy {
+            /* color: #bfbfbf;*/
+            color: #000;
+        }
+        .hidden {
+            display: none;
+        }
+
+        table {
+            border: .07143rem solid;
+            margin-top: .71429rem;
+            width: 100%;
+        }
+
+        td {
+            border: .07143rem solid;
+            padding: .14286rem;
+        }
+    </style>
+</head>
+
+<body>
+    <b><div id="offerTitle" class="copy">Offer Title</div></b>
+    <br />
+    <div id="offerContent" class="copy">Offer Content</div>
+    <div id="offerTable">
+        <table>
+            <tbody>
+                <tr>
+                    <td>APR RATE</td>
+                    <td>36 Months</td>
+                    <td>48 Months</td>
+                    <td>60 Months</td>
+                    <td>72 Months</td>
+                    <td>75 Months</td>
+                    <td>84 Months</td>
+                </tr>
+                <tr>
+                    <td>0.0%</td>
+                    <td>$27.78</td>
+                    <td>$20.83</td>
+                    <td>$16.67</td>
+                    <td>$13.89</td>
+                    <td>$13.33</td>
+                    <td>$11.90</td>
+                </tr>
+                <tr>
+                    <td>0.9%</td>
+                    <td>$28.16</td>
+                    <td>$21.22</td>
+                    <td>$17.05</td>
+                    <td>$14.27</td>
+                    <td>$13.72</td>
+                    <td>$12.29</td>
+                </tr>
+                <tr>
+                    <td>1.9%</td>
+                    <td>$28.60</td>
+                    <td>$21.65</td>
+                    <td>$17.48</td>
+                    <td>$14.71</td>
+                    <td>$14.15</td>
+                    <td>$12.72</td>
+                </tr>
+                <tr>
+                    <td>2.9%</td>
+                    <td>$29.04</td>
+                    <td>$22.09</td>
+                    <td>$17.92</td>
+                    <td>$15.15</td>
+                    <td>$14.59</td>
+                    <td>$13.17</td>
+                </tr>
+                <tr>
+                    <td>3.9%</td>
+                    <td>$29.48</td>
+                    <td>$22.53</td>
+                    <td>$18.37</td>
+                    <td>$15.60</td>
+                    <td>$15.05</td>
+                    <td>$13.62</td>
+                </tr>
+                <tr>
+                    <td>4.9%</td>
+                    <td>$29.93</td>
+                    <td>$22.98</td>
+                    <td>$18.83</td>
+                    <td>$16.06</td>
+                    <td>$15.51</td>
+                    <td>$14.09</td>
+                </tr>
+                <tr>
+                    <td>5.9%</td>
+                    <td>$30.38</td>
+                    <td>$23.44</td>
+                    <td>$19.29</td>
+                    <td>$16.53</td>
+                    <td>$15.97</td>
+                    <td>$14.56</td>
+                </tr>
+                <tr>
+                    <td>6.9%</td>
+                    <td>$30.83</td>
+                    <td>$23.90</td>
+                    <td>$19.75</td>
+                    <td>$17.00</td>
+                    <td>$16.45</td>
+                    <td>$15.04</td>
+                </tr>
+            </tbody>
+        </table></span>
+    </div>
+    <script>
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+        document.getElementById('offerTitle').innerText = getUrlParameter("offerTitle");
+        document.getElementById('offerContent').innerText = getUrlParameter("offerContent");
+        if ("1" !== getUrlParameter("offerTable")) {
+            document.getElementById('offerTable').classList.add("hidden");
+        }
+    </script>
+</body>
+
+</html>
