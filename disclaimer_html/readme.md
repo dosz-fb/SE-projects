@@ -3,7 +3,7 @@
 Example html page to dynamically server web content.
 
 ### Query Parameters:
-  * offerTable: if "1" then show table, otherwise hide it
+  * offerTable: if "1" then show table, if not "1" then hide the table
   * offerTitle: urlencode text, will be the first line of disclaimer
   * offerContent: urlencode text, will be the second line of disclaimer
 
